@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>resultPage</title>
+{% load static %}
+<link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+<!--icon-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+<!--date-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+ <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <script>
+function getName(i) {
+	nameElement = document.getElementsByName('hotelname')[i].value;
+    document.getElementById('hotelname').value=nameElement
+}
+</script>
+</head>
+
+<body>
+	<div class="row banner justify-content-center">
+        <div class="logo">
+			<img id="logo" src="{% static 'goodgo.png' %}" alt="">
+        </div>
+    </div>
+	
+	<!-- Hotel -->
+	<div class="container">
+		<form name ='my_form'action='/resultDetail/' method="get">
+		<table class="table">
+		  <thead>
+			<tr>
+			  <th scope="col">飯店名稱</th>
+			  <th scope="col">評價分數</th>
+              <th scope="col">平均房價</th>
+              <th scope="col">連結</th>
+			</tr>
+		  </thead>
+		   <tbody>
+	{% for each_hotel in advise_hotel_list  %}
+    <tr>
+      <td>{{each_hotel.final_name}}</td>
+      <form name ='{{forloop.counter0}}'action='/resultDetail/' method="get">
+      <td>{{each_hotel.total}}<input type="hidden" id="hotelname" name="hotelname"  value="{{each_hotel.final_name}}"></td>
+      </form>
+        <td>{{each_hotel.average}}</td>
+        <td ><input class="ButtonBtn btn btn-primary"  style="text-align: center" type="submit" name="submit" value="詳情" onclick="getName({{forloop.counter0}})"></td>
+    </tr>
+            {% empty %}
+{% endfor %}
+  </tbody>
+		</table>
+			</form>
+	</div>
+	
+
+</body>
+</html>

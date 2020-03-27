@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>monthly_price</title>
+    {% load static %}
+</head>
+
+<body>
+    {% for each_file in file_list  %}
+        <img src = '/static/price_photo_images/{{each_file}}' style="width: 100%;" >
+    {% empty %}
+    {% endfor %}
+</body>
+</html>
